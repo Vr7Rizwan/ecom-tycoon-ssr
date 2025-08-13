@@ -47,13 +47,12 @@ export default function RenderServicesMenu({ contentMap }: { contentMap: { [key:
   const redirectToServices = (item:string) =>{
     dispatch(toggleService());
     dispatch(setActiveService(item.toLowerCase()));
-    router.push("services");
+    router.push("/services");
   }
 
-  // Reusable: close on click below xl, keep open on xl+; also stops propagation
-  const createCloseOnMobile = (closeFn: () => void) => (e: React.MouseEvent) => {
+  // Stop click from bubbling without closing (used on containers)
+  const stopClickPropagation = (e: React.MouseEvent) => {
     e.stopPropagation();
-    // Remove all click-to-close functionality - dropdowns only close via close button on mobile
   };
 
   const chooseUsSection = useSelector((state: RootState) => state.customSlice.sectionRefs.chooseUsSection);
@@ -66,16 +65,16 @@ export default function RenderServicesMenu({ contentMap }: { contentMap: { [key:
     // const toMatchText = ((e.target as HTMLElement).parentElement?.parentElement?.parentElement?.firstChild?.firstChild?.textContent as string).split(" ").join("").toLowerCase();
     switch (toMatchText) {
       case "whychooseus":
-        chooseUsSection.scrollIntoView({ behavior: 'smooth' });
+        chooseUsSection?.scrollIntoView({ behavior: 'smooth' });
         break;
       case "clientsuccessstories":
-        reviewSection.scrollIntoView({ behavior: 'smooth' });
+        reviewSection?.scrollIntoView({ behavior: 'smooth' });
         break;
       case "meetourexpertteam":
-        teamSection.scrollIntoView({ behavior: 'smooth' });
+        teamSection?.scrollIntoView({ behavior: 'smooth' });
         break;
       case "getintouch":
-        contactSection.scrollIntoView({ behavior: 'smooth' });
+        contactSection?.scrollIntoView({ behavior: 'smooth' });
         break;
       default:
         return;
@@ -89,7 +88,7 @@ export default function RenderServicesMenu({ contentMap }: { contentMap: { [key:
           className="fixed left-0 w-full h-full z-40 dark:bg-gradient-to-br dark:from-slate-900/98 dark:via-gray-900/98 dark:to-slate-800/98 backdrop-blur-xl border-t border-primaryColor/20 shadow-2xl shadow-primaryColor/20 transition-all duration-500"
         >
           <div
-            onClick={createCloseOnMobile(() => dispatch(toggleService()))}
+            onClick={stopClickPropagation}
             className="w-full flex flex-col gap-12 items-center mx-auto px-6 py-8 h-full overflow-y-auto"
           >
             <div className="text-center mb-8">

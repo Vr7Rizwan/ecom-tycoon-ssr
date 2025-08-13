@@ -1,9 +1,6 @@
 // "use client";
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
-const kayakLogo = "/assets/Reviews/kayakLogo.webp";
-const avatar = "/assets/Reviews/Man_Avatar.webp";
-const stanfordLogo = "/assets/Reviews/stanfordLogo.webp";
 
 export interface state {
   activeService: string;
@@ -16,7 +13,7 @@ export interface state {
   pages: string[];
   validPaths: string[];
   isMobileMenuOpen: boolean;
-  sectionRefs: Record<string, any>;
+  sectionRefs: Record<string, HTMLElement | HTMLDivElement | null>;
 }
 
 const initialState: state = {
@@ -71,7 +68,7 @@ export const slice = createSlice({
     toggleIsMobileMenuOpen: (state) => {
       state.isMobileMenuOpen = !state.isMobileMenuOpen;
     },
-    setIsFormPopupOpen: (state, action) => {
+    setIsFormPopupOpen: (state, action: PayloadAction<boolean>) => {
       state.isFormPopupOpen = action.payload;
     },
     setSectionRef: (
@@ -80,17 +77,19 @@ export const slice = createSlice({
     ) => {
       state.sectionRefs[action.payload.key] = action.payload.ref;
     },
-    setActiveItem: (state, action) => {
+    setActiveItem: (state, action: PayloadAction<string>) => {
       state.activeItem = action.payload;
-    }, setItemKey: (state, action) => {
+    },
+    setItemKey: (state, action: PayloadAction<string>) => {
       state.itemKey = action.payload;
-    }, setActiveService: (state,action)=>{
+    },
+    setActiveService: (state, action: PayloadAction<string>) => {
       state.activeService = action.payload;
     }
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { toggleService, toggleDarkMode, toggleIsMobileMenuOpen, setIsFormPopupOpen, setSectionRef, setActiveItem,setItemKey,setActiveService } = slice.actions;
+export const { toggleService, toggleDarkMode, toggleIsMobileMenuOpen, setIsFormPopupOpen, setSectionRef, setActiveItem, setItemKey, setActiveService } = slice.actions;
 
 export default slice.reducer;

@@ -10,13 +10,15 @@ import { setSectionRef } from "@/features/slice/slice";
 import FramerWrapper from "../../../../../../lib/FramerWrapper";
 import Image from "next/image";
 
-export default function ContactUsClient({key}:any) {
+type EmailKey = { service_ID: string; template_ID: string; public_key: string };
+
+export default function ContactUsClient({ emailKey }: { emailKey: EmailKey }) {
   const dispatch = useDispatch();
-  useEffect(()=>{
-    if(formRef.current){
-      dispatch(setSectionRef({key: "contactSection",ref:formRef.current}));
+  useEffect(() => {
+    if (formRef.current) {
+      dispatch(setSectionRef({ key: "contactSection", ref: formRef.current }));
     }
-  },[]);
+  }, [dispatch]);
   const formRef = useRef<HTMLFormElement>(null);
   const [isSending, setIsSending] = useState<boolean>(false);
   const [phone, setPhone] = useState<string>("");
@@ -49,12 +51,12 @@ export default function ContactUsClient({key}:any) {
     };
 
     emailjs
-      .send(key.service_ID, key.template_ID, templateParams, {
-        publicKey: key.public_key,
+      .send(emailKey.service_ID, emailKey.template_ID, templateParams, {
+        publicKey: emailKey.public_key,
       })
       .then((res) => {
         console.log(res);
-        toast.success("Message sent successfully! We'll get back to you soon.");
+        toast.success("Message sent successfully! We\u2019ll get back to you soon.");
         form.reset();
         setPhone("");
       })
@@ -97,12 +99,12 @@ export default function ContactUsClient({key}:any) {
       <div className="text-center mb-6">
         <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold drop-shadow-md leading-tight">
           <em>
-            Have Questions? Let's{" "}
+            Have Questions? Let\u2019s {" "}
             <span className="text-primaryColor">Talk.</span>
           </em>
         </h1>
         <p className="text-gray-600 dark:text-gray-300 text-lg md:text-xl mt-4">
-          We'd love to hear from you. Send us a message and we'll respond as
+          We\u2019d love to hear from you. Send us a message and we\u2019ll respond as
           soon as possible.
         </p>
       </div>
