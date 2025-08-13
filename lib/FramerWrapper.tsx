@@ -8,19 +8,19 @@ interface FramerWrapperProps {
 
   // Animation types (similar to AOS)
   animation?:
-    | "fade"
-    | "fade-up"
-    | "fade-down"
-    | "fade-left"
-    | "fade-right"
-    | "slide-up"
-    | "slide-down"
-    | "slide-left"
-    | "slide-right"
-    | "zoom-in"
-    | "zoom-out"
-    | "flip-up"
-    | "flip-down";
+  | "fade"
+  | "fade-up"
+  | "fade-down"
+  | "fade-left"
+  | "fade-right"
+  | "slide-up"
+  | "slide-down"
+  | "slide-left"
+  | "slide-right"
+  | "zoom-in"
+  | "zoom-out"
+  | "flip-up"
+  | "flip-down";
 
   // Timing
   duration?: number; // in seconds (Framer uses seconds, not ms)
@@ -28,14 +28,14 @@ interface FramerWrapperProps {
 
   // Easing
   easing?:
-    | "linear"
-    | "ease"
-    | "ease-in"
-    | "ease-out"
-    | "ease-in-out"
-    | "ease-in-back"
-    | "ease-out-back"
-    | "ease-in-out-back";
+  | "linear"
+  | "ease"
+  | "ease-in"
+  | "ease-out"
+  | "ease-in-out"
+  | "ease-in-back"
+  | "ease-out-back"
+  | "ease-in-out-back";
 
   // Behavior
   once?: boolean;
@@ -72,8 +72,10 @@ export default function FramerWrapper({
   viewportAmount = 0.2, // 20% of element visible triggers animation
 }: FramerWrapperProps) {
   // Convert easing to Framer Motion format
-  const getEasing = (easingType: string) => {
-    const easingMap: Record<string, number[]> = {
+  const getEasing = (
+    easingType: NonNullable<FramerWrapperProps["easing"]>
+  ): [number, number, number, number] => {
+    const easingMap: Record<string, [number, number, number, number]> = {
       linear: [0, 0, 1, 1],
       ease: [0.25, 0.1, 0.25, 1],
       "ease-in": [0.42, 0, 1, 1],
@@ -85,6 +87,7 @@ export default function FramerWrapper({
     };
     return easingMap[easingType] || easingMap["ease-out"];
   };
+  
 
   // Animation presets
   const getAnimation = (animationType: string) => {
@@ -158,8 +161,9 @@ export default function FramerWrapper({
   const transition = customTransition || {
     duration,
     delay,
-    ease: getEasing(easing),
+    ease: getEasing(easing) as [number, number, number, number],
   };
+  
 
   return (
     <motion.div
