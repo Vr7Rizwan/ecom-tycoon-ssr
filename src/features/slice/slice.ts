@@ -75,7 +75,7 @@ export const slice = createSlice({
       state,
       action: PayloadAction<{ key: string; ref: HTMLElement | HTMLDivElement | null }>
     ) => {
-      state.sectionRefs[action.payload.key] = action.payload.ref;
+      state.sectionRefs[action.payload.key] = action.payload.ref as any;
     },
     setActiveItem: (state, action: PayloadAction<string>) => {
       state.activeItem = action.payload;
