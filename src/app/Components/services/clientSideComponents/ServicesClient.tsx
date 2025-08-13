@@ -27,12 +27,17 @@ interface ServiceBanner {
     underTitle: string;
     btn: string;
 }
-
+interface SolutionItem {
+    title: string;
+    img: string;
+    content: string;
+  }
 interface ServiceData {
     category: string;
     banner: ServiceBanner;
     overview: ServiceOverview;
     btn: string;
+    solutions: SolutionItem[];
 }
 
 interface Banner {
@@ -62,6 +67,7 @@ export default function ServicesClient({servicesData,emailkey}:{servicesData:Ser
     console.log(...activeData);
     const bannerData:Banner = activeData[0].banner;
     const overviewData:Overview = activeData[0].overview;
+    console.log(activeData[0].solutions);
   return (
     <div>
       <Banner bannerData={bannerData} activeService={activeService as string} />

@@ -22,12 +22,17 @@ interface ServiceBanner {
     underTitle: string;
     btn: string;
 }
-
+interface SolutionItem {
+    title: string;
+    img: string;
+    content: string;
+  }
 interface ServiceData {
     category: string;
     banner: ServiceBanner;
     overview: ServiceOverview;
     btn: string;
+    solutions: SolutionItem[];
 }
 export default function ServicesServer() {
   return <ServicesClient servicesData={servicesData as ServiceData[]} emailkey={emailKey as any} />
