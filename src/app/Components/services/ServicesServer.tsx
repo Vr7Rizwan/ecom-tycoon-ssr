@@ -1,6 +1,7 @@
 import React from 'react';
 import ServicesClient from './clientSideComponents/ServicesClient';
 import { servicesData } from '@/features/servicesData/servicesData';
+import emailKey from '@/features/email/emailConfig';
 
 interface ServiceContent {
     title: string;
@@ -29,5 +30,5 @@ interface ServiceData {
     btn: string;
 }
 export default function ServicesServer() {
-  return <ServicesClient servicesData={servicesData as ServiceData[]} />
+  return <ServicesClient servicesData={servicesData as ServiceData[]} emailkey={emailKey as any} />
 }
