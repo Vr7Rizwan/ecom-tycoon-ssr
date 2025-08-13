@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { toggleService,setActiveItem } from "@/features/slice/slice";
 import { JSX } from "react";
 
+
 export default function RenderNavMenu() {
 
   const dispatch = useDispatch();
@@ -82,7 +83,6 @@ export default function RenderNavMenu() {
           const itemKeyComp = item.toLowerCase();
           const normalizedKey = itemKeyComp.split(" ").join(""); // Consistent normalization
           const isActive = activeItem === normalizedKey;
-
           return (
             <li key={`${item}-${index}`} className="relative">
               <button

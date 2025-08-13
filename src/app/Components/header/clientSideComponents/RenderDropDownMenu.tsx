@@ -47,6 +47,7 @@ export default function RenderServicesMenu({ contentMap }: { contentMap: { [key:
   const redirectToServices = (item:string) =>{
     dispatch(toggleService());
     dispatch(setActiveService(item.toLowerCase()));
+    dispatch(setActiveItem(""));
     router.push("/services");
   }
 
