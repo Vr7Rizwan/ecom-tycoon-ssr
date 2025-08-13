@@ -1,17 +1,9 @@
 // In client side due to framewrapper being client side and it is wrapping whole component
-import FramerWrapper from "../../../../../../lib/FramerWrapper";
 import Image from "next/image";
 import Button from "./Button";
 
 export default function IntroClient() {
   return (
-    <FramerWrapper
-      animation="fade-down"
-      duration={0.8} // 800ms converted to seconds
-      delay={0.1} // 100ms converted to seconds
-      easing="ease-out"
-      once={true}
-    >
       <div className="px-10 py-10 md:pr-0 md:py-0">
         <div className="flex flex-row items-center gap-12 xl:gap-20 2xl:gap-32 md:pl-14">
           <div className="w-full md:w-1/2 text-left flex flex-col items-start gap-12 lg:gap-30 py-5 md:py-24">
@@ -37,6 +29,5 @@ export default function IntroClient() {
           </div>
         </div>
       </div>
-    </FramerWrapper>
   );
 }
