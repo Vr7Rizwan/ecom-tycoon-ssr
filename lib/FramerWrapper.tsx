@@ -1,7 +1,7 @@
 // src/features/FramerWrapper.tsx
 "use client";
 import React, { ReactNode } from "react";
-import { motion, MotionProps } from "framer-motion";
+import { motion, MotionProps, cubicBezier } from "framer-motion";
 
 interface FramerWrapperProps {
   children: ReactNode;
@@ -71,10 +71,10 @@ export default function FramerWrapper({
   viewportMargin = "0px",
   viewportAmount = 0.2, // 20% of element visible triggers animation
 }: FramerWrapperProps) {
-  // Convert easing to Framer Motion format
-  const getEasing = (
+  // Convert easing to Framer Motion easing function
+  const getEasingFn = (
     easingType: NonNullable<FramerWrapperProps["easing"]>
-  ): [number, number, number, number] => {
+  ) => {
     const easingMap: Record<string, [number, number, number, number]> = {
       linear: [0, 0, 1, 1],
       ease: [0.25, 0.1, 0.25, 1],
@@ -85,9 +85,9 @@ export default function FramerWrapper({
       "ease-out-back": [0.34, 1.56, 0.64, 1],
       "ease-in-out-back": [0.68, -0.6, 0.32, 1.6],
     };
-    return easingMap[easingType] || easingMap["ease-out"];
+    const bezier = easingMap[easingType] || easingMap["ease-out"];
+    return cubicBezier(bezier[0], bezier[1], bezier[2], bezier[3]);
   };
-  
 
   // Animation presets
   const getAnimation = (animationType: string) => {
@@ -161,9 +161,8 @@ export default function FramerWrapper({
   const transition = customTransition || {
     duration,
     delay,
-    ease: getEasing(easing) as [number, number, number, number],
+    ease: getEasingFn(easing),
   };
-  
 
   return (
     <motion.div
