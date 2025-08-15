@@ -7,6 +7,7 @@ import { RootState } from '@/features/store/store';
 import Overview from './Overview';
 import FormPopUpServer from '../../formPopUp/FormPopUpServer';
 import { stat } from 'fs';
+import Solutions from './Solutions';
 
 interface ServiceContent {
     title: string;
@@ -67,7 +68,6 @@ export default function ServicesClient({servicesData,emailkey,sectionClasses}:{s
     console.log(...activeData);
     const bannerData:Banner = activeData[0].banner;
     const overviewData:Overview = activeData[0].overview;
-    console.log(activeData[0].solutions);
   return (
     <div>
       <Banner bannerData={bannerData} activeService={activeService as string} />
@@ -78,6 +78,7 @@ export default function ServicesClient({servicesData,emailkey,sectionClasses}:{s
       <button onClick={handleClick} className='bg-primaryColor text-white text-base md:text-2xl py-4 px-4 md:py-6 md:px-6 lg:text-3xl lg:py-8 lg:px-12 rounded-full hover:bg-secondaryColor hover:text-black transition-all duration-500 hover:scale-105 active:scale-95'>{activeData[0].btn}</button>
       {isFormPopupOpen && <FormPopUpServer onClose={handleCloseFormPopup} emailKey={emailkey} />}
       </div>
+      <Solutions/>
     </div>
   )
 }
