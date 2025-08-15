@@ -1,4 +1,8 @@
 import React from 'react'
+import FormPopUpServer from '../../formPopUp/FormPopUpServer';
+import { useDispatch, useSelector } from 'react-redux';
+import { setIsFormPopupOpen } from '@/features/slice/slice';
+import { RootState } from '@/features/store/store';
 
 interface SolutionItem {
     title: string;
@@ -8,9 +12,18 @@ interface SolutionItem {
 interface SolutionsProps {
     solutionsData: SolutionItem[];
     activeService: string;
+    emailKey: any;
 }
 
-export default function Solutions({ solutionsData, activeService }: SolutionsProps) {
+export default function Solutions({ solutionsData, activeService,emailKey }: SolutionsProps) {
+    const dispatch = useDispatch();
+    const isFormPopupOpen:boolean = useSelector((state:RootState)=>state.customSlice.isFormPopupOpen);
+    const hanldeClick = () =>{
+        dispatch(setIsFormPopupOpen(true));
+    }
+    const handleCloseFormPopup = () => {
+        dispatch(setIsFormPopupOpen(false));
+      };
     return (
         <div className="py-12 md:py-16 lg:py-20 px-4 sm:px-6 lg:px-8">
             {/* Section Title */}
@@ -53,7 +66,9 @@ export default function Solutions({ solutionsData, activeService }: SolutionsPro
 
                             {/* Static Button (Always Visible at bottom) */}
                             <div className="absolute bottom-0 left-0 right-0 z-30 p-4 md:p-6 lg:p-8">
-                                <button className="bg-gradient-to-r from-teal-500 to-teal-600 hover:from-teal-400 hover:to-cyan-500 text-white font-semibold py-2 px-4 md:py-3 md:px-6 lg:py-4 lg:px-8 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl text-sm md:text-base">
+                                <button 
+                                onClick={hanldeClick}
+                                className="bg-primaryColor hover:bg-secondaryColor text-white hover:text-black font-semibold py-2 px-4 md:py-3 md:px-6 lg:py-4 lg:px-8 rounded-full transition-all duration-500 transform hover:scale-105 shadow-lg hover:shadow-xl text-sm md:text-base">
                                     Get in Touch
                                 </button>
                             </div>
@@ -73,6 +88,7 @@ export default function Solutions({ solutionsData, activeService }: SolutionsPro
                     ))}
                 </div>
             </div>
+            {isFormPopupOpen && <FormPopUpServer onClose={handleCloseFormPopup} emailKey={emailKey} />}
         </div>
     )
 }
