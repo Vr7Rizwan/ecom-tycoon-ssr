@@ -34,6 +34,8 @@ interface ServiceData {
     btn: string;
     solutions: SolutionItem[];
 }
+const sectionClasses:string =
+  "bg-white dark:from-gray-800 dark:bg-gray-900 text-gray-900 dark:text-gray-100 border-t border-gray-200 dark:border-gray-700";
 export default function ServicesServer() {
-  return <ServicesClient servicesData={servicesData as ServiceData[]} emailkey={emailKey as any} />
+  return <ServicesClient servicesData={servicesData as ServiceData[]} emailkey={emailKey as any} sectionClasses={sectionClasses as string} />
 }

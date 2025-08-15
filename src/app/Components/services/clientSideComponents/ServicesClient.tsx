@@ -53,7 +53,7 @@ interface Overview {
         content: ServiceContent[];
     };
 }
-export default function ServicesClient({servicesData,emailkey}:{servicesData:ServiceData[],emailkey:any}) {
+export default function ServicesClient({servicesData,emailkey,sectionClasses}:{servicesData:ServiceData[],emailkey:any,sectionClasses:string}) {
     const isFormPopupOpen = useSelector((state:RootState)=>state.customSlice.isFormPopupOpen);
     const dispatch = useDispatch();
     const handleClick = () =>{
@@ -71,9 +71,11 @@ export default function ServicesClient({servicesData,emailkey}:{servicesData:Ser
   return (
     <div>
       <Banner bannerData={bannerData} activeService={activeService as string} />
+      <section className={sectionClasses}>
       <Overview overViewData={overviewData} activeService={activeService as string} />
+      </section>
       <div className='flex justify-center'>
-      <button onClick={handleClick} className='bg-primaryColor text-white text-4xl py-8 px-12 rounded-4xl hover:bg-secondaryColor hover:text-black transition-all duration-500'>{activeData[0].btn}</button>
+      <button onClick={handleClick} className='bg-primaryColor text-white text-base md:text-2xl py-4 px-4 md:py-6 md:px-6 lg:text-3xl lg:py-8 lg:px-12 rounded-full hover:bg-secondaryColor hover:text-black transition-all duration-500 hover:scale-105 active:scale-95'>{activeData[0].btn}</button>
       {isFormPopupOpen && <FormPopUpServer onClose={handleCloseFormPopup} emailKey={emailkey} />}
       </div>
     </div>
