@@ -89,7 +89,7 @@ export default function Banner({ bannerData, activeService }: BannerProps) {
 
           <h2
             className={`
-              text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl
+              text-3xl md:text-4xl xl:text-5xl
               font-bold text-center leading-tight
               bg-gradient-to-r from-teal-300 via-teal-400 to-cyan-300 bg-clip-text text-transparent
               drop-shadow-2xl
@@ -105,20 +105,18 @@ export default function Banner({ bannerData, activeService }: BannerProps) {
             className={`
               mt-4 sm:mt-6 md:mt-8
               py-3 px-8 sm:py-4 sm:px-10 md:py-5 md:px-12 lg:py-6 lg:px-14
-              bg-gradient-to-r from-teal-500 to-teal-600
-              hover:from-teal-400 hover:to-cyan-500
-              text-white font-semibold
+              bg-primaryColor text-white
+              hover:bg-secondaryColor hover:text-black
+              font-semibold
               text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl
               rounded-full
               shadow-lg hover:shadow-2xl
               transform hover:scale-105 active:scale-95
-              transition-all duration-300 ease-out
-              border border-teal-400/50 hover:border-cyan-300
+              transition-all duration-500 ease-out
               backdrop-blur-sm
               ${isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}
               focus:outline-none focus:ring-4 focus:ring-teal-300/50
             `}
-            style={{ transitionDelay: "0.6s" }}
           >
             {capitalizeInitials(bannerData.btn)}
           </button>

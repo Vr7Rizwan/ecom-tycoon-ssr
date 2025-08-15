@@ -43,7 +43,7 @@ export default function Overview({
               {overViewData.goodAt.title}
             </strong>
           </h4>
-          <ul className="flex flex-col gap-3 lg:gap-4 text-base sm:text-lg md:text-2xl xl:w-3xl">
+          <ul className="flex flex-col gap-3 lg:gap-6 text-base sm:text-lg md:text-3xl xl:w-3xl">
             {overViewData.goodAt.content.map((section, index) => (
               <li
                 className="list-disc pl-4"

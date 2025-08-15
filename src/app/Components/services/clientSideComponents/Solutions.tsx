@@ -35,32 +35,32 @@ export default function Solutions({ solutionsData, activeService }: SolutionsPro
                         >
                             {/* Background Image */}
                             <div
-                                className="absolute inset-0 bg-cover bg-center transition-all duration-700 group-hover:blur-sm group-hover:scale-110"
+                                className="absolute inset-0 z-0 bg-cover bg-center transition-all duration-700 group-hover:blur-sm group-hover:scale-110"
                                 style={{
                                     backgroundImage: `url("/assets/Services/${activeService.toLowerCase()}/solution-${index + 1}.webp")`
                                 }}
                             />
                             
                             {/* Overlay */}
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent group-hover:from-black/90 group-hover:via-black/60 transition-all duration-700" />
+                            <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/80 via-black/20 to-transparent group-hover:from-black/90 group-hover:via-black/60 transition-all duration-700" />
                             
                             {/* Static Title (Always Visible at top) */}
-                            <div className="absolute top-0 left-0 right-0 p-4 md:p-6 lg:p-8">
+                            <div className="absolute top-0 left-0 right-0 z-20 p-4 md:p-6 lg:p-8">
                                 <h2 className="text-2xl md:text-4xl xl:text-5xl font-bold text-white leading-tight group-hover:opacity-0 transition-opacity duration-500">
                                     {item.title}
                                 </h2>
                             </div>
 
                             {/* Static Button (Always Visible at bottom) */}
-                            <div className="absolute bottom-0 left-0 right-0 p-4 md:p-6 lg:p-8">
-                                <button className="bg-gradient-to-r from-teal-500 to-teal-600 hover:from-teal-400 hover:to-cyan-500 text-white font-semibold py-2 px-4 md:py-3 md:px-6 lg:py-4 lg:px-8 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl text-sm md:text-base group-hover:opacity-0">
+                            <div className="absolute bottom-0 left-0 right-0 z-30 p-4 md:p-6 lg:p-8">
+                                <button className="bg-gradient-to-r from-teal-500 to-teal-600 hover:from-teal-400 hover:to-cyan-500 text-white font-semibold py-2 px-4 md:py-3 md:px-6 lg:py-4 lg:px-8 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl text-sm md:text-base">
                                     Get in Touch
                                 </button>
                             </div>
                             
                             {/* Hover Content (Only content visible) */}
-                            <div className="absolute inset-0 p-4 md:p-6 lg:p-8 flex flex-col justify-center items-center opacity-0 group-hover:opacity-100 transform translate-x-full group-hover:translate-x-0 transition-all duration-700 ease-out">
-                                <div className="bg-black/30 backdrop-blur-sm rounded-xl p-4 md:p-6 border border-white/20 w-full h-full flex flex-col justify-center items-center">
+                            <div className="absolute inset-0 z-20 p-4 md:p-6 lg:p-8 flex flex-col justify-center items-center opacity-0 group-hover:opacity-100 transform translate-x-full group-hover:translate-x-0 transition-all duration-700 ease-out">
+                                <div className="bg-black/30 backdrop-blur-sm rounded-xl p-4 md:p-6  w-full h-full flex flex-col justify-center items-center">
                                     <p className="text-sm md:text-base lg:text-lg text-gray-100 leading-relaxed text-center overflow-y-auto max-h-full">
                                         {item.content}
                                     </p>
@@ -68,7 +68,7 @@ export default function Solutions({ solutionsData, activeService }: SolutionsPro
                             </div>
                             
                             {/* Corner Accent */}
-                            <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-bl from-teal-500/20 to-transparent rounded-bl-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                            <div className="absolute top-0 right-0 z-20 w-20 h-20 bg-gradient-to-bl from-teal-500/20 to-transparent rounded-bl-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                         </div>
                     ))}
                 </div>
