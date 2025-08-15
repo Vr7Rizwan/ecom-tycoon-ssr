@@ -21,7 +21,6 @@ const HeaderClient = ({ contentMap }: { contentMap: { [key: string]: { title: st
   const [scrolled, setScrolled] = useState(false);
   const isServiceOpen = useSelector((state: RootState) => state.customSlice.isServiceOpen);
   const activeItem = useSelector((state:RootState)=>state.customSlice.activeItem);
-  const [isActive,setIsActive] = useState<boolean>(false);
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 500) {

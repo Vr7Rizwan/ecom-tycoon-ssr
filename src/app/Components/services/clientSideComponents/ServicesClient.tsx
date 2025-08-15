@@ -30,7 +30,6 @@ interface ServiceBanner {
 }
 interface SolutionItem {
     title: string;
-    img: string;
     content: string;
   }
 interface ServiceData {
@@ -64,21 +63,28 @@ export default function ServicesClient({servicesData,emailkey,sectionClasses}:{s
         dispatch(setIsFormPopupOpen(false));
       };
     const activeService = useSelector((state:RootState)=>state.customSlice.activeService);
-    const activeData = servicesData.filter((service)=>service.category === activeService);
-    console.log(...activeData);
-    const bannerData:Banner = activeData[0].banner;
-    const overviewData:Overview = activeData[0].overview;
+    const activeData = servicesData.find(
+        (service) => service.category.toLowerCase() === activeService.toLowerCase()
+      );
+    console.log(activeData);
+    if (!activeData) {
+        console.warn("No matching service found for", activeService);
+        return null; // or a fallback UI
+      }
+    const bannerData:Banner = activeData.banner;
+    const overviewData:Overview = activeData.overview;
+    const solutionsData: SolutionItem[] = activeData.solutions;
   return (
     <div>
-      <Banner bannerData={bannerData} activeService={activeService as string} />
+      <Banner bannerData={bannerData as ServiceBanner} activeService={activeService as string} />
       <section className={sectionClasses}>
-      <Overview overViewData={overviewData} activeService={activeService as string} />
+      <Overview overViewData={overviewData as ServiceOverview} activeService={activeService as string} />
       </section>
       <div className='flex justify-center'>
-      <button onClick={handleClick} className='bg-primaryColor text-white text-base md:text-2xl py-4 px-4 md:py-6 md:px-6 lg:text-3xl lg:py-8 lg:px-12 rounded-full hover:bg-secondaryColor hover:text-black transition-all duration-500 hover:scale-105 active:scale-95'>{activeData[0].btn}</button>
+      <button onClick={handleClick} className='bg-primaryColor text-white text-base md:text-2xl py-4 px-4 md:py-6 md:px-6 lg:text-3xl lg:py-8 lg:px-12 rounded-full hover:bg-secondaryColor hover:text-black transition-all duration-500 hover:scale-105 active:scale-95'>{activeData.btn}</button>
       {isFormPopupOpen && <FormPopUpServer onClose={handleCloseFormPopup} emailKey={emailkey} />}
       </div>
-      <Solutions/>
+      <Solutions solutionsData={solutionsData as SolutionItem[]} activeService={activeService as string} />
     </div>
   )
 }
