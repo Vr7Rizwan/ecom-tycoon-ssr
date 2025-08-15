@@ -25,13 +25,25 @@ interface SolutionItem {
   title: string;
   content: string;
 }
-
+interface PricingItem{
+  hourly:{
+    starter: number;
+    professional: number;
+    enterprise: number;
+  }
+  fixed:{
+    starter: number;
+    professional: number;
+    enterprise: number;
+  }
+}
 interface ServiceData {
   category: string;
   banner: ServiceBanner;
   overview: ServiceOverview;
   btn: string;
   solutions: SolutionItem[];
+  pricing: PricingItem;
 }
 
 // Corrected Data
@@ -98,6 +110,18 @@ export const servicesData: ServiceData[] = [
         content:
           "We specialize in integrating third-party services and APIs into your web platform to enhance functionality and improve efficiency. Whether it’s payment gateways, social media platforms, CRM systems, or other enterprise software, we ensure that the integration process is seamless and that all systems communicate effectively. Our team also develops custom APIs to connect your website with other platforms or services, enhancing flexibility and scalability."
       },
-    ]
+    ],
+    pricing: {
+      hourly:{
+        starter:25,
+        professional:45,
+        enterprise:75,
+      },
+      fixed:{
+        starter:2500,
+        professional:5500,
+        enterprise:12500,
+      }
+    }
   }
 ];

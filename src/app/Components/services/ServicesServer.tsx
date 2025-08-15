@@ -27,12 +27,25 @@ interface SolutionItem {
     img: string;
     content: string;
   }
+  interface PricingItem{
+    hourly:{
+      starter: number;
+      professional: number;
+      enterprise: number;
+    }
+    fixed:{
+      starter: number;
+      professional: number;
+      enterprise: number;
+    }
+  }
 interface ServiceData {
     category: string;
     banner: ServiceBanner;
     overview: ServiceOverview;
     btn: string;
     solutions: SolutionItem[];
+    pricing: PricingItem;
 }
 const sectionClasses:string =
   "bg-white dark:from-gray-800 dark:bg-gray-900 text-gray-900 dark:text-gray-100 border-t border-gray-200 dark:border-gray-700";

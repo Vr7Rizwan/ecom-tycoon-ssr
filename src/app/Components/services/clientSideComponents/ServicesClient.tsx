@@ -9,6 +9,9 @@ import FormPopUpServer from '../../formPopUp/FormPopUpServer';
 import { stat } from 'fs';
 import Solutions from './Solutions';
 import FlowchartSection from './FlowchartSection';
+import PricingComponent from './PricingComponent';
+import ContactUsServer from '../../landingPage/contactUs/ContactUsServer';
+import { PricingData } from '@/features/servicesData/pricingData';
 
 interface ServiceContent {
   title: string;
@@ -33,12 +36,25 @@ interface SolutionItem {
   title: string;
   content: string;
 }
+interface PricingItem {
+  hourly: {
+    starter: number;
+    professional: number;
+    enterprise: number;
+  }
+  fixed: {
+    starter: number;
+    professional: number;
+    enterprise: number;
+  }
+}
 interface ServiceData {
   category: string;
   banner: ServiceBanner;
   overview: ServiceOverview;
   btn: string;
   solutions: SolutionItem[];
+  pricing: PricingItem;
 }
 
 interface Banner {
@@ -54,7 +70,25 @@ interface Overview {
     content: ServiceContent[];
   };
 }
+// Pricing
+interface PricingFeature {
+  feature: string;
+  included: boolean;
+}
+
+interface PricingPlan {
+  name: string;
+  badge?: string;
+  hourlyPrice: string;
+  fixedPrice: string;
+  description: string;
+  features: PricingFeature[];
+  buttonText: string;
+  buttonVariant: 'primary' | 'secondary' | 'outline';
+  popular?: boolean;
+}
 export default function ServicesClient({ servicesData, emailkey, sectionClasses }: { servicesData: ServiceData[], emailkey: any, sectionClasses: string }) {
+  const plans: PricingPlan[] = PricingData();
   const isFormPopupOpen = useSelector((state: RootState) => state.customSlice.isFormPopupOpen);
   const dispatch = useDispatch();
   const handleClick = () => {
@@ -67,7 +101,6 @@ export default function ServicesClient({ servicesData, emailkey, sectionClasses 
   const activeData = servicesData.find(
     (service) => service.category.toLowerCase() === activeService.toLowerCase()
   );
-  console.log(activeData);
   if (!activeData) {
     console.warn("No matching service found for", activeService);
     return null; // or a fallback UI
@@ -88,7 +121,15 @@ export default function ServicesClient({ servicesData, emailkey, sectionClasses 
       <section className={sectionClasses}>
         <Solutions solutionsData={solutionsData as SolutionItem[]} activeService={activeService as string} emailKey={emailkey as any} />
       </section>
-      <FlowchartSection activeService={activeService as string}/>
+      <FlowchartSection activeService={activeService as string} />
+      <section className={sectionClasses}>
+        <PricingComponent
+          pricingPlans={plans as PricingPlan[]} emailKey={emailkey}
+        />
+      </section>
+      <section className={sectionClasses}>
+        <ContactUsServer />
+      </section>
     </div>
   )
 }
