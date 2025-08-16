@@ -47,7 +47,6 @@ export default function FooterServer() {
   const quickLinks: QuickLink[] = [
     { name: "About Us", url: "/about" },
     { name: "Careers", url: "/careers" },
-    { name: "Privacy Policy", url: "/privacy-policy" },
     { name: "Terms of Service", url: "/terms-of-service" },
   ];
 
