@@ -52,7 +52,7 @@ const initialState: state = {
     ],
     "Customer Care Solutions": ["Chat Support 24/7 services"],
     "Business Consulting": ["Help you grow your business"],
-  }
+  },
 };
 
 export const slice = createSlice({
@@ -73,7 +73,10 @@ export const slice = createSlice({
     },
     setSectionRef: (
       state,
-      action: PayloadAction<{ key: string; ref: HTMLElement | HTMLDivElement | null }>
+      action: PayloadAction<{
+        key: string;
+        ref: HTMLElement | HTMLDivElement | null;
+      }>
     ) => {
       state.sectionRefs[action.payload.key] = action.payload.ref as any;
     },
@@ -85,11 +88,20 @@ export const slice = createSlice({
     },
     setActiveService: (state, action: PayloadAction<string>) => {
       state.activeService = action.payload;
-    }
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { toggleService, toggleDarkMode, toggleIsMobileMenuOpen, setIsFormPopupOpen, setSectionRef, setActiveItem, setItemKey, setActiveService } = slice.actions;
+export const {
+  toggleService,
+  toggleDarkMode,
+  toggleIsMobileMenuOpen,
+  setIsFormPopupOpen,
+  setSectionRef,
+  setActiveItem,
+  setItemKey,
+  setActiveService,
+} = slice.actions;
 
 export default slice.reducer;

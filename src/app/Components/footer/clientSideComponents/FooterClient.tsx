@@ -3,6 +3,8 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import { useDispatch } from "react-redux";
+import { toggleService, setActiveItem } from "@/features/slice/slice";
 
 interface SocialLink {
   name: string;
@@ -40,9 +42,13 @@ export default function FooterClient({
   const currentYear = new Date().getFullYear();
 
   const [hoveredSocial, setHoveredSocial] = useState<number | null>(null);
+  const dispatch = useDispatch();
 
-  const handleNavigation = (url: string) => {
-    router.push(url);
+  const handleNavigation = (item: string, url: string) => {
+    servicesArray.includes(item) ? dispatch(toggleService()) : router.push(url);
+    // servicesArray.includes(item) || router.push(url);
+    console.log(item);
+    // router.push(url);
   };
 
   return (
@@ -120,7 +126,7 @@ export default function FooterClient({
                       href="#"
                       onClick={(e) => {
                         e.preventDefault();
-                        handleNavigation(link.url);
+                        handleNavigation(link.name, link.url);
                       }}
                       className="group inline-flex items-center text-gray-300 hover:text-primaryColor transition-all duration-300 text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl"
                     >
@@ -144,7 +150,12 @@ export default function FooterClient({
                       href="#"
                       onClick={(e) => {
                         e.preventDefault();
-                        handleNavigation(`/${serviceCategory.toLowerCase().replace(/\s+/g, '-')}`);
+                        handleNavigation(
+                          serviceCategory,
+                          `/${serviceCategory
+                            .toLowerCase()
+                            .replace(/\s+/g, "-")}`
+                        );
                       }}
                       className="group inline-flex items-center text-gray-300 hover:text-primaryColor transition-all duration-300 text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl"
                     >

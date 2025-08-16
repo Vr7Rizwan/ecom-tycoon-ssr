@@ -3,20 +3,24 @@ import { RootState } from "@/features/store/store";
 import React, { useState, useRef, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/navigation";
-import { toggleService,setActiveItem } from "@/features/slice/slice";
+import { toggleService, setActiveItem } from "@/features/slice/slice";
 import { JSX } from "react";
 
-
 export default function RenderNavMenu() {
-
   const dispatch = useDispatch();
   const pages = useSelector((state: RootState) => state.customSlice.pages);
-  const validPaths = useSelector((state: RootState) => state.customSlice.validPaths);
-  const isServiceOpen = useSelector((state: RootState) => state.customSlice.isServiceOpen);
+  const validPaths = useSelector(
+    (state: RootState) => state.customSlice.validPaths
+  );
+  const isServiceOpen = useSelector(
+    (state: RootState) => state.customSlice.isServiceOpen
+  );
   const router = useRouter();
 
   // Now tracking a single active item
-  const activeItem = useSelector((state:RootState)=>state.customSlice.activeItem);
+  const activeItem = useSelector(
+    (state: RootState) => state.customSlice.activeItem
+  );
   // const [activeItem, setActiveItem] = useState<string | null>(null);
   const navRef = useRef<HTMLDivElement>(null);
 
@@ -77,7 +81,10 @@ export default function RenderNavMenu() {
   };
 
   return (
-    <nav ref={navRef} className="hidden xl:block w-[60%] text-base sm:text-lg md:text-2xl text-white">
+    <nav
+      ref={navRef}
+      className="hidden xl:block w-[60%] text-base sm:text-lg md:text-2xl text-white"
+    >
       <ul className="flex justify-center gap-7 relative">
         {pages.map((item, index) => {
           const itemKeyComp = item.toLowerCase();
@@ -113,7 +120,9 @@ export default function RenderNavMenu() {
                 {/* Underline animation */}
                 <span
                   className={`absolute bottom-0 left-0 h-[2px] bg-primaryColor w-full transform transition-transform duration-300 origin-left ${
-                    isActive ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
+                    isActive
+                      ? "scale-x-100"
+                      : "scale-x-0 group-hover:scale-x-100"
                   }`}
                 ></span>
               </button>
