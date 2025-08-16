@@ -6,7 +6,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-phone-input-2/lib/style.css";
 import "react-toastify/dist/ReactToastify.css";
 import { useDispatch } from "react-redux";
-import { setSectionRef } from "@/features/slice/slice";
+import { setSectionRef } from "../../../../../features/slice/slice";
 import FramerWrapper from "../../../../../../lib/FramerWrapper";
 import Image from "next/image";
 
