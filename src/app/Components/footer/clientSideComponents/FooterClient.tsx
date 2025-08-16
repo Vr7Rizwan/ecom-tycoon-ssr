@@ -44,11 +44,8 @@ export default function FooterClient({
   const [hoveredSocial, setHoveredSocial] = useState<number | null>(null);
   const dispatch = useDispatch();
 
-  const handleNavigation = (item: string, url: string) => {
-    servicesArray.includes(item) ? dispatch(toggleService()) : router.push(url);
-    // servicesArray.includes(item) || router.push(url);
-    console.log(item);
-    // router.push(url);
+  const handleNavigation = (url: string) => {
+    router.push(url);
   };
 
   return (
@@ -123,12 +120,12 @@ export default function FooterClient({
                 {quickLinks.map((link, index) => (
                   <li key={link.name}>
                     <a
-                      href="#"
+                      // href="#"
                       onClick={(e) => {
                         e.preventDefault();
-                        handleNavigation(link.name, link.url);
+                        handleNavigation(link.url);
                       }}
-                      className="group inline-flex items-center text-gray-300 hover:text-primaryColor transition-all duration-300 text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl"
+                      className="group inline-flex items-center text-gray-300 hover:text-primaryColor transition-all duration-300 text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl cursor-pointer"
                     >
                       <span className="w-0 group-hover:w-4 h-px bg-primaryColor transition-all duration-300 mr-0 group-hover:mr-2"></span>
                       {link.name}
@@ -146,22 +143,10 @@ export default function FooterClient({
               <ul className="space-y-0.5 lg:space-y-3">
                 {servicesArray?.slice(0, 6).map((serviceCategory, index) => (
                   <li key={serviceCategory + index}>
-                    <a
-                      href="#"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        handleNavigation(
-                          serviceCategory,
-                          `/${serviceCategory
-                            .toLowerCase()
-                            .replace(/\s+/g, "-")}`
-                        );
-                      }}
-                      className="group inline-flex items-center text-gray-300 hover:text-primaryColor transition-all duration-300 text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl"
-                    >
+                    <span className="group inline-flex items-center text-gray-300 hover:text-primaryColor transition-all duration-300 text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl">
                       <span className="w-0 group-hover:w-4 h-px bg-primaryColor transition-all duration-300 mr-0 group-hover:mr-2"></span>
                       {serviceCategory}
-                    </a>
+                    </span>
                   </li>
                 ))}
               </ul>
